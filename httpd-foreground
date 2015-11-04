@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+# Apache gets grumpy about PID files pre-existing
+rm -f /etc/httpd/run/httpd.pid
+
+# We need to run that rpcbind
+exec rpcbind
+
+exec httpd -DFOREGROUND -e info
